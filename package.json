@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "name": "maidana-project",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "desafios practicos",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maidana",
+  "license": "ISC"
+}
