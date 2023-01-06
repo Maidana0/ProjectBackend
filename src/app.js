@@ -6,7 +6,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
 app.get('/', (req, res) => {
-    res.send(`Bienvenido a nuestro sitio web`)
+    res.json({"welcome": "Bienvenido a nuestro sitio web"})
 })
 
 app.get('/products', (req, res) => {
@@ -20,7 +20,7 @@ app.get('/products', (req, res) => {
 app.get('/products/:pid', (req, res) => {
     const idProduct = parseInt(req.params.pid)
     const producto = products.find(prod => prod.id === idProduct)
-    if(!producto) res.send(`Ocurrio un Error. El producto con el ID: ${idProduct} no existe`)
+    if(!producto) res.json({"error": `Ocurrio un Error. El producto con el ID: ${idProduct} no existe`})
     res.json({producto})
 })
 
