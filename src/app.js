@@ -1,32 +1,24 @@
-// import ProductManager from "./components/ProductManager.js";
-import products from "./components/Productos.json" assert { type: "json" };
+import productsRouter from './routes/products.router.js'
+import cartsRouter from './routes/cart.router.js'
 import express from 'express';
+import { dirname } from 'path'
+import { fileURLToPath } from 'url';
+const __dirname = dirname (fileURLToPath(import.meta.url))
+
+const PORT = 8080
+
 const app = express()
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 
-app.get('/', (req, res) => {
-    res.json({"welcome": "Bienvenido a nuestro sitio web"})
-})
+app.use(express.static(__dirname + '/../public'))
 
-app.get('/products', (req, res) => {
-    const limit = parseInt(req.query.limit)
-    if(!limit) res.json({products})
-    const prodLimit = products.filter(prode=>prode.id<=limit)
-    res.json({prodLimit})
-
-})
-
-app.get('/products/:pid', (req, res) => {
-    const idProduct = parseInt(req.params.pid)
-    const producto = products.find(prod => prod.id === idProduct)
-    if(!producto) res.json({"error": `Ocurrio un Error. El producto con el ID: ${idProduct} no existe`})
-    res.json({producto})
-})
+app.use('/api/products',productsRouter)
+app.use('/api/carts',cartsRouter)
 
 
 
 
-
-app.listen(8080, () => console.log(`Server on Port: ${8080}`))
+app.listen(PORT, () => console.log(`Server on Port: ${PORT}`))
 
