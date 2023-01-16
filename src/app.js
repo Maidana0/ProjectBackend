@@ -1,12 +1,9 @@
 import productsRouter from './routes/products.router.js'
 import cartsRouter from './routes/cart.router.js'
 import express from 'express';
-import { dirname } from 'path'
-import { fileURLToPath } from 'url';
-const __dirname = dirname (fileURLToPath(import.meta.url))
+import {__dirname} from './utils.js'
 
 const PORT = 8080
-
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

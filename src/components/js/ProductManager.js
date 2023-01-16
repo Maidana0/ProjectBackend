@@ -1,6 +1,8 @@
 import fs from 'fs'
 
+
 const textError = numero => `Ocurrio un Error. El producto con el id:"${numero}" no existe.`
+
 export class ProductManager {
     constructor(ruta) {
         this.path = ruta
@@ -94,28 +96,6 @@ export class ProductManager {
     }
 
 }
-
-//  const ProductoManager = new ProductManager('Productos.json')
-
-
-// for (let index = 1; index < 11; index++) {
-//     const prueba=(numero,precio,stock)=>{
-//         ProductoManager.addProduct({
-//             "title": `Producto ${numero}`,
-//             "description":  `Esta descripcion pertenece al producto numero: ${numero}`,
-//             "code": `abc${numero}`,
-//             "price": precio,
-//             "status": true,
-//             "stock":   stock,
-//             "category": "default",
-//             "thumbnails":[
-//                 "url-front", "url-back","url-default","url-top"
-//             ]
-//          }
-//         )
-//     }
-//     prueba(index,index*100,index*50)
-// }
 
 
 export default ProductManager

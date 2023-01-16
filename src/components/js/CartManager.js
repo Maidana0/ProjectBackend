@@ -8,9 +8,7 @@ export class CartManager {
         const listCarts = fs.existsSync(this.cartsPath)
             ? JSON.parse(fs.readFileSync(this.cartsPath, 'utf-8'))
             : []
-        const listProducts = fs.existsSync(this.productsPath)
-            ? JSON.parse(fs.readFileSync(this.productsPath, 'utf-8'))
-            : []
+        const listProducts = JSON.parse(fs.readFileSync(this.productsPath, 'utf-8'))
 
         this.carts = listCarts
         this.products = listProducts
