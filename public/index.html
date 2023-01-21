@@ -1,12 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="images/logo.png" />
+    <link rel="apple-touch-icon" href="images/logo.png" />
+    <link rel="stylesheet" href="styles/main.css">
+    <title>Maidana Project</title>
 </head>
+
 <body>
-    <h1> Bienvenido a nuestro sitio en progreso!!</h1>
+    <header>
+        <div class="header">
+            <img alt='logo' class='logo' src="images/logo.png">
+            <h2> Maidana Project </h2>
+        </div>
+
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/views/products">Productos</a>
+            <a href="/views/carts">Carrito</a>
+            <a href="/views/realtimeproducts">Online</a>
+        </nav>
+    </header>
+    <main>
+        <div class="app">
+            <div class="container home">
+                Bienvenido a nuestro sitio (en progreso) desde el BackEnd.
+            </div>
+
+            <!-- {{!--
+                 "id": 1,
+            "title": "Producto 1",
+            "description": "Esta descripcion pertenece al producto numero: 1",
+            "code": "abc1",
+            "price": 100,
+            "status": true,
+            "stock": 50,
+            "category": "default",
+            "thumbnails": [
+            "url-front",
+            "url-back",
+            "url-default",
+            "url-top"
+            ] --}} -->
+            <!-- <form action="/api/products" method="get">
+                <input type="submit" value="Ir a productos">
+            </form> -->
+            <form action="/api/products" method="post">
+                <input placeholder="Titulo / Nombre" type="text" name="title" id="title" autocomplete="off">
+                <input placeholder="Descripcion" type="text" name="description" id="description" autocomplete="off">
+                <input placeholder="Codigo" type="text" name="code" id="code" autocomplete="off">
+                <input placeholder="Precio" type="number" name="price" id="price" autocomplete="off">
+                <input placeholder="Stock" type="number" name="stock" id="stock" autocomplete="off">
+                <input placeholder="Categoria" type="text" name="category" id="category" autocomplete="off">
+                <input placeholder="Imagenes" type="text" name="thumbnails" id="thumbnails" autocomplete="off">
+                <label form="status">Estado: </label>
+                <select name="status" id="status">
+                    <option>true</option>
+                    <option>false</option>
+                </select>
+
+                <!-- <input placeholder="Estado" type="text" name="status" id="status" autocomplete="off"> -->
+                <input type="submit" value="Agregar Producto">
+            </form>
+
+
+        </div>
+
+
+
+    </main>
+    <footer>
+        <h4> Maidana Project </h4>
+    </footer>
 </body>
+
 </html>

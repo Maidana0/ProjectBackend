@@ -17,6 +17,14 @@ export class CartManager {
         return this.carts.length === 0 ? 1 : this.carts[this.carts.length - 1].id + 1
     }
 
+    async getCarts() {
+        try {
+            const getCart = await this.carts
+            return this.carts
+        } catch (er) { const error = String(er); return { "error": error } }
+    }
+
+
     async addCart() {
         try {
             const carts = await this.carts
@@ -27,12 +35,12 @@ export class CartManager {
             carts.push(newCart)
             fs.promises.writeFile(this.cartsPath, JSON.stringify(carts, null, 2))
             return (
-                { "sucess": "Carrito agregado con Exito!", "newCart": newCart }
+                { "sucess": "Carrito agregado con Exito!", newCart }
             )
         }
 
-        catch (error) {
-            return { "error": error }
+        catch (er) {
+            const error = String(er); return { "error": error }
         }
     }
 
@@ -40,11 +48,11 @@ export class CartManager {
         try {
             const getCart = await this.carts.find(cart => cart.id === getId)
             if (getCart) return getCart
-            else {
-                return {
-                    "error": "El carrito que buscas no existe en nuestra base de datos."
-                }
+
+            return {
+                "error": "El carrito que buscas no existe en nuestra base de datos."
             }
+
         } catch (er) { const error = String(er); return { "error": error } }
     }
 
@@ -55,28 +63,26 @@ export class CartManager {
             if (thisCart.error || !addThisProduct) {
                 return { "error": "El carrito o producto no existe en nuestra base de datos." }
             }
-            else {
-                const indexCart = await this.carts.indexOf(thisCart)
-                const repetido = this.carts[indexCart].products.find(products => products.product === addThisProduct.id)
-                if (repetido) {
-                    repetido.quantity++
-                    fs.promises.writeFile(this.cartsPath, JSON.stringify(this.carts, null, 2))
-                    return {"sucess": "Producto agregado con exito!", thisCart}
-                }
-                else {
-                    const newProd = {
-                        "product": addThisProduct.id,
-                        "quantity": 1
-                    }
-                    await this.carts[indexCart].products.push(newProd)
-                    fs.promises.writeFile(this.cartsPath, JSON.stringify(this.carts, null, 2))
-                    return {"sucess": "Producto agregado con exito!", thisCart}
-                }
+
+            const indexCart = await this.carts.indexOf(thisCart)
+            const repetido = this.carts[indexCart].products.find(products => products.product === addThisProduct.id)
+            if (repetido) {
+                repetido.quantity++
+                fs.promises.writeFile(this.cartsPath, JSON.stringify(this.carts, null, 2))
+                return { "sucess": "Producto agregado con exito!", thisCart }
             }
 
+            const newProd = {
+                "product": addThisProduct.id,
+                "quantity": 1
+            }
+            await this.carts[indexCart].products.push(newProd)
+            fs.promises.writeFile(this.cartsPath, JSON.stringify(this.carts, null, 2))
+            return { "sucess": "Producto agregado con exito!", thisCart }
 
-        } catch (error) {
-            console.log(error)
+
+        } catch (er) {
+            const error = String(er); return { "error": error }
         }
     }
 

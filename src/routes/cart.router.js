@@ -6,8 +6,9 @@ const router = Router()
 
 const URLcarts = __dirname + '/components/db/Carts.json'
 const URLproducts = __dirname + '/components/db/Productos.json'
-console.log(URLproducts)
 const carts = new CartManager(URLcarts,URLproducts)
+
+
 
 router.post('/', async(req,res)=>{
     try {
