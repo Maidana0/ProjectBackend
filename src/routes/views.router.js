@@ -11,7 +11,8 @@ const productManager = new ProductManager(rutaProducts)
 const carts = new CartManager(rutaCarts,rutaProducts)
 
 
-const onlineURL = __dirname + '/dataProducts.json'
+// const onlineURL = __dirname + '/dataProducts.json'
+const onlineURL = __dirname + '/components/db/Productos.json'
 const onlineProducts = new ProductManager(onlineURL)
 
 
@@ -53,11 +54,10 @@ router.get('/carts', async (req, res) => {
 router.get('/realtimeproducts', async (req, res) => {
   try {
     const limit = parseInt(req.query.limit)
-    const productos = await onlineProducts.getProducts()
-    if (!limit)
-      return res.render('realTimeProducts', { 'list': productos, 'product': false })
-
-    const prodLimit = await productos.filter(prode => prode.id <= limit)
+    const products = await onlineProducts.getProducts()
+    if (!limit)   return res.render('realTimeProducts', { 'list': products, 'product': false })
+    
+    const prodLimit = await products.filter(prode => prode.id <= limit)
     res.render('realTimeProducts', { 'list': prodLimit, 'product': false })
 
   } catch (error) {
@@ -70,7 +70,6 @@ router.get('/realtimeproducts/:pid', async (req, res) => {
   try {
     const idProduct = parseInt(req.params.pid)
     const aProduct = await onlineProducts.getProductById(idProduct)
-
     res.render('realTimeProducts', { 'list': aProduct, 'product': true })
 
   } catch (error) {

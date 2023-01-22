@@ -1,28 +1,4 @@
 <div id="contain" class="container products">
-    <h1>Agregar un Producto</h1>
-    {{!-- <form action="/api/products" method="post"> --}}
-        <form class="form" id="formProduct">
-            <input required placeholder="Titulo / Nombre" type="text" name="title" id="title" autocomplete="off" >
-            <input required placeholder="Descripcion" type="text" name="description" id="description" autocomplete="off">
-            <input required placeholder="Codigo" type="text" name="code" id="code" autocomplete="off">
-            <input required placeholder="Precio" type="number" name="price" id="price" autocomplete="off">
-            <input required placeholder="Stock" type="number" name="stock" id="stock" autocomplete="off">
-            <input required placeholder="Categoria" type="text" name="category" id="category" autocomplete="off">
-            <input required placeholder="Imagenes" type="text" name="thumbnails" id="thumbnails" autocomplete="off">
-            <section>
-                <label form="status">Estado: </label>
-                <select name="status" id="status">
-                    <option>true</option>
-                    <option>false</option>
-                </select>
-            </section>
-            <strong id="error"></strong>
-            <input id="addProduct"type="submit" value="Agregar Producto">
-        </form>
-
-
-
-
 {{#if product}}
     {{#if list.error}}
     <div class="error">
@@ -41,7 +17,7 @@
         <h3>{{list.title}}</h3>
         <p>Codigo: {{list.code}}</p>
         <p> Categoria: {{list.category}} </p>
-        <p> {{list.description}} </p>
+        <p> Descripcion: {{list.description}} </p>
         <p> Precio: {{list.price}}</p>
         <p> Stock: {{list.stock}}</p>
         <p> Estado: {{ list.status }}</p>
@@ -52,9 +28,31 @@
 
 
     {{else}}
+        <h1>Agregar un Producto</h1>
+    {{!-- <form action="/api/products" method="post"> --}}
+        <form class="form" id="formProduct">
+            <input required placeholder="Titulo / Nombre" type="text" name="title" id="title" autocomplete="off" >
+            <input required placeholder="Descripcion" type="text" name="description" id="description" autocomplete="off">
+            <input required placeholder="Codigo" type="text" name="code" id="code" autocomplete="off">
+            <input required placeholder="Precio" type="number" name="price" id="price" autocomplete="off">
+            <input required placeholder="Stock" type="number" name="stock" id="stock" autocomplete="off">
+            <input required placeholder="Categoria" type="text" name="category" id="category" autocomplete="off">
+            <input required placeholder="Imagenes" type="text" name="thumbnails" id="thumbnails" autocomplete="off">
+            <section>
+                <label form="status">Estado: </label>
+                <select name="status" id="status">
+                    <option>true</option>
+                    <option>false</option>
+                </select>
+            </section>
+            <div id="msj-form">Complete todos los campos.</div>
+            <input id="addProduct"type="submit" value="Agregar Producto">
+        </form>
+        
     <h1>Lista de Productos:</h1>
+    <div id="socket-list">
 
-    {{#each list}}
+    {{!-- {{#each list}}
     <div class="list-products">
         <div class="products-header">
             <p> {{id}}</p>
@@ -68,9 +66,11 @@
 
         <p> Estado: {{status}}</p>
         <div>Imagenes:{{tumbnails}}</div>
+        <button  data-id="{{id}}">Editar</button>
+        <button  data-id="{{id}}">Borrar</button>
     </div>
-    {{/each}}
-
+    {{/each}} --}}
+    </div>
     {{/if}}
 
 </div>
@@ -82,4 +82,4 @@
 
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="../../index.js"></script>
+<script src="../../realTimeProducts.js"></script>

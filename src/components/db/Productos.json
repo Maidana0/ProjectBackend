@@ -1,21 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "Producto 1",
-    "description": "Esta descripcion pertenece al producto numero: 1",
-    "code": "abc1",
-    "price": 100,
-    "status": true,
-    "stock": 50,
-    "category": "default",
-    "thumbnails": [
-      "url-front",
-      "url-back",
-      "url-default",
-      "url-top"
-    ]
-  },
-  {
     "id": 2,
     "title": "Producto 2",
     "description": "Esta descripcion pertenece al producto numero: 2",
@@ -161,35 +145,13 @@
   },
   {
     "id": 11,
-    "title": "dwada",
-    "description": "dwada",
-    "code": "dawdawda",
-    "price": "123",
+    "title": "Producto Ultimo(?",
+    "description": "este producto es el ultimo que agregue",
+    "code": "abc11",
+    "price": "11000",
     "status": "true",
-    "stock": "213",
-    "category": "dawdwa",
-    "thumbnails": "dawdaw"
-  },
-  {
-    "id": 12,
-    "title": "dawdaw",
-    "description": "dwadwa",
-    "code": "q",
-    "price": "12",
-    "status": "true",
-    "stock": "12",
-    "category": "dawa",
-    "thumbnails": "dwawda"
-  },
-  {
-    "id": 13,
-    "title": "dawdwa",
-    "description": "awdaw",
-    "code": "dwadaw",
-    "price": "123",
-    "status": "true",
-    "stock": "123",
-    "category": "dawda",
-    "thumbnails": "dawda"
+    "stock": "600",
+    "category": "last",
+    "thumbnails": "no hay imagen aun"
   }
 ]

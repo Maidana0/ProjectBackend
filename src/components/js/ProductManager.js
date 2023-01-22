@@ -90,7 +90,7 @@ export class ProductManager {
 
     async deleteProduct(byId) {
         try {
-            const deleteProd = await this.products.indexOf(this.products.find(prod => prod.id === byId))
+            const deleteProd = await this.products.indexOf(this.products.find(prod => prod.id === Number(byId)))
             if (deleteProd >= 0) {
                 await this.products.splice(deleteProd, 1)
                 if (this.products.length > 0) {
