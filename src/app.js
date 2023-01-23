@@ -7,12 +7,15 @@ import productsRouter from './routes/products.router.js'
 import cartsRouter from './routes/cart.router.js'
 import viewsRouter from './routes/views.router.js'
 
-import ProductManager from './components/js/ProductManager.js';
-// const onlineURL = __dirname + '/dataProducts.json'
-const onlineURL = __dirname + '/components/db/Productos.json'
 
-const onlineProducts = new ProductManager(onlineURL)
-const lista = await onlineProducts.getProducts()
+import socketProducts from './socket/socket.products.js';
+
+// import ProductManager from './components/js/ProductManager.js';
+// // const onlineURL = __dirname + '/dataProducts.json'
+// const onlineURL = __dirname + '/components/db/Productos.json'
+
+// const onlineProducts = new ProductManager(onlineURL)
+// const lista = await onlineProducts.getProducts()
 
 
 const PORT = 8080
@@ -31,34 +34,36 @@ app.use('/api/carts',cartsRouter)
 
 const httpServer = app.listen(PORT, () => console.log(`Server on Port: ${PORT}`))
 const socketServer = new Server(httpServer)
+socketProducts(socketServer)
 
 
-socketServer.on('connection',(socket)=>{
-    socketServer.emit('server:list',lista)
+// SEPARE ESTO Y LO PUSE EN LA CARPETA SOCKET
+// socketServer.on('connection',(socket)=>{
+//     socketServer.emit('server:list',lista)
 
 
-    console.log('Cliente Conectado! ID:',socket.id)
-    socket.on('disconnect', () => console.log('Usuario Desconectado! ID:',socket.id))
+//     console.log('Cliente Conectado! ID:',socket.id)
+//     socket.on('disconnect', () => console.log('Usuario Desconectado! ID:',socket.id))
      
 
-    socket.on('client:newProduct',async(obj)=>{
-       const product=  await  onlineProducts.addProduct(obj)
-       if(product.error){
-        return socket.emit('server:error',product.error)
-       }
-        socket.emit('server:newProduct',product.sucess)
-        console.log(product)
-    })
+//     socket.on('client:newProduct',async(obj)=>{
+//        const product=  await  onlineProducts.addProduct(obj)
+//        if(product.error){
+//         return socket.emit('server:error',product.error)
+//        }
+//         socket.emit('server:newProduct',product.sucess)
+//         console.log(product)
+//     })
     
-    socket.on('client:deleteProd',async(id)=>{
-        await onlineProducts.deleteProduct(id)
-        const list = await onlineProducts.getProducts()
-        socketServer.emit('server:deleteProduct', list)
+//     socket.on('client:deleteProd',async(id)=>{
+//         await onlineProducts.deleteProduct(id)
+//         const list = await onlineProducts.getProducts()
+//         socketServer.emit('server:deleteProduct', list)
         
-    })
+//     })
 
 
-})
+// })
 
 
 
