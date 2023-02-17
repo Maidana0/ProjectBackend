@@ -1,0 +1,36 @@
+<div class="chat-header">
+    <img class='logo' src="../../images/minion.png">
+    <h2>
+        Bienvenido a nuestro chat!
+    </h2>
+    <img class='logo' src="../../images/minion.png">
+</div>
+<div class="chat container">
+    <div id="allMsg" class="chat-msg">
+        {{#if chat}}
+        {{#each chat}}
+        <div id="contain-newMsg" class="msg-byOTher">
+            {{user}}
+            <p>
+                {{message}}
+            </p>
+        </div>
+
+        {{!-- <div class="msg-byUser">
+            User: {{user}}
+            Message: {{message}}
+        </div> --}}
+        {{/each}}
+        {{else}}
+        Chat Vacio
+        {{/if}}
+    </div>
+    <form id="msgForm" class="chat-form">
+        <input id="newMsg" type="text" autocomplete="off" placeholder="Ingrese su mensaje...">
+        <input type="submit" value="Enviar">
+    </form>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="../../chat.js"></script>

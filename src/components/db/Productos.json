@@ -142,16 +142,5 @@
       "url-default",
       "url-top"
     ]
-  },
-  {
-    "id": 11,
-    "title": "Producto Ultimo(?",
-    "description": "este producto es el ultimo que agregue",
-    "code": "abc11",
-    "price": "11000",
-    "status": "true",
-    "stock": "600",
-    "category": "last",
-    "thumbnails": "no hay imagen aun"
   }
 ]

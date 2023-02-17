@@ -1,16 +1,21 @@
-const socket = io()
-const contain = document.getElementById('socket-list')
+//PUBLIC 
+const socketChat = io()
 
-const form = document.getElementById('formProduct')
-const inputTitle = document.querySelector('#title')
-const inputDescription = document.querySelector('#description')
-const inputCode = document.querySelector('#code')
-const inputPrice = document.querySelector('#price')
-const inputStock = document.querySelector('#stock')
-const inputCategory = document.querySelector('#category')
-const inputThumbnails = document.querySelector('#thumbnails')
-const inputStatus = document.querySelector('#status')
+const containChat = document.getElementById('allMsg')
 
+const sendForm = document.getElementById('msgForm')
+const inputMsg = document.getElementById('newMsg')
+
+    sendForm.onsubmit = (e) =>{
+        e.preventDefault()
+        console.log(inputMsg.value)
+        
+        sendForm.reset()
+
+    }
+
+
+/*
 if(form){
     form.onsubmit = e => {
         e.preventDefault()
@@ -30,8 +35,6 @@ if(form){
     }
 }
 
-
-
 const addProduct = obj => {
     const div = document.createElement('div')
     div.classList.add('list-products')
@@ -49,8 +52,8 @@ const addProduct = obj => {
             <div>
                 Imagenes:${obj.thumbnails}
             </div>
-            <button id="btn-update" data-id="${obj.id}">Editar</button>
-            <button id="btn-delete" data-id="${obj.id}">Borrar</button>
+            <button id="btn-update" data-id="${obj._id}">Editar</button>
+            <button id="btn-delete" data-id="${obj._id}">Borrar</button>
     `
     if(!contain) return
     contain.appendChild(div)
@@ -61,7 +64,7 @@ const addProduct = obj => {
         e.preventDefault()
         socket.emit('client:deleteProd', btnDelete.dataset.id)
         console.log("Borrar elemento: " + btnDelete.dataset.id)
-        const deleteThis= lista.find((producto)=>producto.id==btnDelete.dataset.id)
+        const deleteThis= lista.find((producto)=>producto._id==btnDelete.dataset.id)
         const index = lista.indexOf(deleteThis)
         lista.splice(index,1)
     })
@@ -74,10 +77,11 @@ const addProduct = obj => {
 
 
 let lista = []
-
+console.log(lista)
 socket.on('server:list', async(data) => {
     await data.forEach((product) => {
-        const repetido = lista.find((prod) => prod.id === product.id)
+        console.log(product)
+        const repetido = lista.find((prod) => prod._id === product._id)
         if (!repetido) {
              lista.push(product)
              addProduct(product)
@@ -103,3 +107,4 @@ const msjForm = document.getElementById('msj-form')
 socket.on('server:error', (e) =>  msjForm.textContent = "**" + e + "**")
 socket.on('server:newProduct', e => msjForm.textContent = e + "!!")
 
+*/

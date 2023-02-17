@@ -29,7 +29,6 @@
 
     {{else}}
         <h1>Agregar un Producto</h1>
-    {{!-- <form action="/api/products" method="post"> --}}
         <form class="form" id="formProduct">
             <input required placeholder="Titulo / Nombre" type="text" name="title" id="title" autocomplete="off" >
             <input required placeholder="Descripcion" type="text" name="description" id="description" autocomplete="off">
@@ -52,24 +51,6 @@
     <h1>Lista de Productos:</h1>
     <div id="socket-list">
 
-    {{!-- {{#each list}}
-    <div class="list-products">
-        <div class="products-header">
-            <p> {{id}}</p>
-            <h3>{{title}}</h3>
-            <p>{{code}}</p>
-        </div>
-        <p> Categoria: {{category}} </p>
-        <p> {{description}} </p>
-        <p> Precio: {{price}}</p>
-        <p> Stock: {{stock}}</p>
-
-        <p> Estado: {{status}}</p>
-        <div>Imagenes:{{tumbnails}}</div>
-        <button  data-id="{{id}}">Editar</button>
-        <button  data-id="{{id}}">Borrar</button>
-    </div>
-    {{/each}} --}}
     </div>
     {{/if}}
 
@@ -82,4 +63,4 @@
 
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="../../realTimeProducts.js"></script>
+<script src="../../products.js"></script>

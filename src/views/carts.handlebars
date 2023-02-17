@@ -1,0 +1,49 @@
+<div class="container products">
+    {{#if allCarts}}
+    {{#each list}}
+    <div class="list-products">
+        <div class="products-header">
+            <h2>Carrito N°:{{id}}</h2>
+            <p>Id:{{id}}</p>
+        </div>
+        <h3>Productos en el Carrito:</h3>
+        <br>
+        {{#each products}}
+        <p>Producto con el ID: {{id}}</p>
+        <p>Cantidad:{{quantity}}</p>
+        <hr>
+        {{/each}}
+
+    </div>
+    {{/each}}
+
+
+
+    {{else}}
+    <div class="list-products">
+        <div class="products-header">
+            <h2>Carrito N°:{{list.id}}</h2>
+            <p>Id:{{list.id}}</p>
+        </div>
+        <h3>Productos en el Carrito:</h3>
+        <br>
+        {{#each products}}
+        <p>Producto con el ID: {{id}}</p>
+        <p>Cantidad:{{quantity}}</p>
+        <hr>
+        {{/each}}
+    </div>
+
+    {{/if}}
+</div>
+
+
+{{!-- {
+"id": 1,
+"products": [
+{
+"product": 8,
+"quantity": 2
+}
+]
+}, --}}

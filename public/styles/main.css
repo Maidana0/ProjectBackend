@@ -43,7 +43,6 @@ header {
 }
 .logo{
     max-width: 45px;
-    margin-right:  20px;
 }
 .img-home{
     width: 100%;
@@ -81,7 +80,9 @@ main,
     display: flex;
     flex-direction: column;
     min-height: 82vh;
-    margin: auto;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .app {
@@ -151,6 +152,7 @@ h1{
     align-items: center;
     text-align: center;
     width: 30%;
+    gap: 20px;
     padding: 8px 0; 
 }
 nav{
@@ -168,7 +170,7 @@ nav{
     object-fit: contain;
 }
 
-form{
+.form{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -180,7 +182,7 @@ form{
     border-radius: 30px;
     box-shadow: 0 0 20px 5px yellow;
 }
-input{
+.form input{
     padding: .8rem;
     width: 70%;
     border-style: none;
@@ -192,10 +194,10 @@ input{
     font-weight: 500;
     transition: all .5s;
 }
-input::placeholder{
+.form input::placeholder{
     color: whitesmoke;
 }
-input:hover{
+.form input:hover{
     background-color: black;
 }
 #addProduct{
@@ -261,7 +263,7 @@ section{
     nav{
         width: 80%;
     }
-    input{
+    .form input{
         width: 100%;
     }
 }

@@ -1,14 +1,14 @@
 import { Router } from "express";
-import CartManager from "../components/js/CartManager.js";
-import { __dirname } from "../utils.js";
+// import CartManager from "../components/fileSystem/CartManager.js";
+// import { __dirname } from "../utils.js";
+import { CartManagerDB } from "../components/mongoDB/CartManagerDB.js";
 
 const router = Router()
 
-const URLcarts = __dirname + '/components/db/Carts.json'
-const URLproducts = __dirname + '/components/db/Productos.json'
-const carts = new CartManager(URLcarts,URLproducts)
-
-
+// const URLcarts = __dirname + '/components/db/Carts.json'
+// const URLproducts = __dirname + '/components/db/Productos.json'
+// const carts = new CartManager(URLcarts,URLproducts)
+const carts = new CartManagerDB()
 
 router.post('/', async(req,res)=>{
     try {
@@ -22,10 +22,9 @@ router.post('/', async(req,res)=>{
 
 router.get('/:cid', async (req, res) => {
     try {
-        const idCart = parseInt(req.params.cid)
+        const idCart = req.params.cid
         const aCart = await carts.getCart(idCart)
-        res.json(aCart)
-
+        res.redirect(`/views/carts/${aCart._id}`)
     } catch (error) {
         console.log(error)
     }
@@ -42,9 +41,6 @@ router.post('/:cid/product/:pid', async(req,res)=>{
         console.log(error)
     }
 })
-
-
-
 
 
 
