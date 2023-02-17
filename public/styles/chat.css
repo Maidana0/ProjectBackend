@@ -36,12 +36,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-#contain-newMsg{
-    background-color: black;
-    color: white;
+    
 }
 
+.contain-newMsg{
+    width: 100%;
+}
+.message{
+    color: white;
+    background-color: pink;
+    width:fit-content;
+    margin-bottom: 5px;
+    padding: 8px;
+    border-radius: 12px;
+}
 /* .msg-byUser{
     text-align: right;
 }
@@ -69,6 +77,19 @@
 .chat-form input:nth-child(2){
     width: auto;
     padding: 5px 7px;
+}
+#logout{
+    background-color: red;
+    font-weight: 600;
+    padding: 10px 30px;
+    margin: 0 auto 1rem;
+    border-radius: 12px;
+}
+.off{
+    display: none;
+}
+.on{
+    display: block;
 }
 @media only screen and (max-width: 768px){ 
     .chat{

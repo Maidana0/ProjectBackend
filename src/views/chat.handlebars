@@ -5,8 +5,9 @@
     </h2>
     <img class='logo' src="../../images/minion.png">
 </div>
-<div class="chat container">
-    <div id="allMsg" class="chat-msg">
+<div id="chatContain" class="chat container">
+
+    {{!-- <div id="allMsg" class="chat-msg">
         {{#if chat}}
         {{#each chat}}
         <div id="contain-newMsg" class="msg-byOTher">
@@ -20,17 +21,23 @@
             User: {{user}}
             Message: {{message}}
         </div> --}}
-        {{/each}}
+        {{!-- {{/each}}
         {{else}}
         Chat Vacio
-        {{/if}}
+        {{/if}} --}}
+        {{!--
     </div>
+    
     <form id="msgForm" class="chat-form">
         <input id="newMsg" type="text" autocomplete="off" placeholder="Ingrese su mensaje...">
         <input type="submit" value="Enviar">
-    </form>
+    </form> --}}
+
 
 </div>
+<button id="logout" type="submit" class="off">Salir</button>
+
+
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="../../chat.js"></script>

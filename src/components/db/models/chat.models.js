@@ -4,7 +4,7 @@ const chatSchema = new mongoose.Schema({
     user:{
         type: String,
         required: true,
-        minLength: 5
+        minLength: 2
     }, 
 
     message: {
