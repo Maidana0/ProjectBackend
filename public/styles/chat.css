@@ -34,25 +34,46 @@
     height: 90%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
+    align-items: start;
+    justify-content: start;
+    overflow: scroll;
+    padding-right: 10px;
+
 }
+.chat-msg::-webkit-scrollbar {width: 3px; height: 1px; }
+.chat-msg::-webkit-scrollbar-track {background: rgba(255, 255, 255, 0.527); }
+.chat-msg::-webkit-scrollbar-thumb {background-color: yellow; border-radius: 8px; }
+
+
 
 .contain-newMsg{
     width: 100%;
 }
 .message{
-    color: white;
-    background-color: pink;
-    width:fit-content;
+    color: black;
+    background-color: yellow;
+    width: fit-content;
+    max-width: 100%;
     margin-bottom: 5px;
-    padding: 8px;
+    padding: 8px 12px;
     border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
 }
-/* .msg-byUser{
-    text-align: right;
+.message p{
+    word-wrap: break-word;
+
 }
+.msg-byUser{
+    display: flex;
+    justify-content: flex-end;
+}
+.msg-byUser .message{
+    background-color: white;
+}
+/* 
 .msg-byOTher{
     text-align: left;
 } */

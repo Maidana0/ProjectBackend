@@ -12,7 +12,7 @@ if (!user) {
     mainChatContain.innerHTML = `
     <img class='bigLogo' src="../../images/batman_log.png">
     <form id="login" class="form">
-        <input id="user" type="string" placeholder="Escriba su usario">
+        <input id="user" autocomplete="off" type="string" placeholder="Escriba su usario" required>
         <input type="submit" value="Ingresar">
     </from>
     `
@@ -43,44 +43,48 @@ if (!user) {
     const sendForm = document.getElementById('msgForm')
     const inputMsg = (document.getElementById('newMsg'))
 
-    const addMsg = obj =>{
-        const div = document.createElement('div')
+    const addMsg = (obj, bool) => {
+        containChat.scrollTo(100000,100000)
+
+        const div =  document.createElement('div')
         div.classList.add('contain-newMsg')
-        div.innerHTML = `
+        if(bool) div.classList.add('msg-byUser')
+          div.innerHTML = `
         <div class="message">
-        <h4> ${obj.user} </h4>
-        <p> ${obj.message} </p>
+        <strong> ${obj.user} </strong>
+        <p>${obj.message} </p>
         </div>
         `
-        if(!containChat) return
+
+        if (!containChat) return
         containChat.appendChild(div)
     }
 
     sendForm.onsubmit = (e) => {
         e.preventDefault()
         const objMsg = {
-            user:user,
+            user: user,
             message: inputMsg.value
         }
         socketChat.emit('client:newMessage', objMsg)
         sendForm.reset()
+        containChat.scrollTo(100000,100000)
     }
 
 
 
     let messages = []
     console.log(messages)
-
-    socketChat.on('server:chat', async data=>{
-        await data.forEach((msg)=>{
+    socketChat.on('server:chat', async data => {
+        await data.forEach((msg) => {
             console.log(msg)
-            const repetido = messages.find((obj) => obj.message === msg.message && obj.user == msg.user)
-            if(!repetido){
+            const repetido = messages.find((obj) => obj._id === msg._id)
+            if (!repetido) {
+                const eso = msg.user == user ? true : false
                 messages.push(msg)
-                addMsg(msg)
+                addMsg(msg,eso)
                 return
             }
-            console.log('msj viejo')
         })
     })
 
