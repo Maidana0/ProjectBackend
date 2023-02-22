@@ -77,29 +77,30 @@ const addProduct = obj => {
 
 let lista = []
 console.log(lista)
-socket.on('server:list', async(data) => {
-    await data.forEach((product) => {
-        console.log(product)
-        const repetido = lista.find((prod) => prod._id === product._id)
-        if (!repetido) {
-             lista.push(product)
-             addProduct(product)
-            return
-        }
-        console.log("producto repetido")
-    })
-})
+// socket.on('server:list', async(data) => {
+//     console.log(data.error)
+//     await data.forEach((product) => {
+//         console.log(product)
+//         const repetido = lista.find((prod) => prod._id === product._id)
+//         if (!repetido) {
+//              lista.push(product)
+//              addProduct(product)
+//             return
+//         }
+//         console.log("producto repetido")
+//     })
+// })
 
-socket.on('server:deleteProduct',async(data) => {
-    console.log(data)
-    lista = []
-    await data.forEach((product) => {
-        lista.push(product)
-        addProduct(product)
-    }) 
-    contain.innerHTML=' '
-    lista.forEach((dataa)=>addProduct(dataa))
-})
+// socket.on('server:deleteProduct',async(data) => {
+//     console.log(data)
+//     lista = []
+//     await data.forEach((product) => {
+//         lista.push(product)
+//         addProduct(product)
+//     }) 
+//     contain.innerHTML=' '
+//     lista.forEach((dataa)=>addProduct(dataa))
+// })
 
 
 const msjForm = document.getElementById('msj-form')

@@ -5,11 +5,37 @@ const textError = numero => `Ocurrio un Error. El producto con el id:"${numero}"
 
 export class ProductManagerDB {
 
-    async getProducts() {
+    async getProducts(obj) {
         try {
-            const listProducts = await productsModel.find()
+            const { limit, page, sort, query } = await obj
+            const options = {
+                page,
+                limit,
+                sort
+            }
+            const infoProducts = await productsModel.paginate(query, options)
 
-            return listProducts && listProducts
+            function prevLink() {
+                return infoProducts.hasPrevPage ? `http://localhost:8080/api/products?page=${infoProducts.page - 1}` : null
+            }
+
+            function nextLink() {
+                return infoProducts.hasNextPage ? `http://localhost:8080/api/products?page=${infoProducts.page + 1}` : null
+            }
+            const finish = {
+                status: 'success',
+                payload: infoProducts.docs,
+                totalPages: infoProducts.totalPages,
+                prevPag: infoProducts.prevPag,
+                nextPage: infoProducts.nexPag,
+                page: infoProducts.page,
+                hasPrevPage: infoProducts.hasPrevPage,
+                hasNextPage: infoProducts.hasNextPage,
+                prevLink: prevLink(),
+                nextLink: nextLink()
+            }
+
+            return finish
 
         } catch (error) {
             return { error }
@@ -18,7 +44,7 @@ export class ProductManagerDB {
 
     async getProductById(getId) {
         try {
-            const getProduct = await productsModel.find({_id:getId})
+            const getProduct = await productsModel.find({ _id: getId })
             if (getProduct) {
                 return getProduct
             }
@@ -33,7 +59,7 @@ export class ProductManagerDB {
         try {
             const { title, description, code, price, status, stock, category, thumbnails } = obj
             const alReadyExist = await productsModel.find({ code: code })
-            
+
             if (alReadyExist) return { "error": `Ocurrio un Error. El code "${code}" ya existe.` }
 
             const currentProduct = {

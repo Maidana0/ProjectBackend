@@ -21,14 +21,23 @@ const prod = new ProductManagerDB()
 // })
 router.get('/', async (req, res) => {
     try {
-        const {limit,page, sort, query} = req.query
+        function ordenar(orde) {
+            if (orde == 'asc') return 1
+            if (orde == 'desc') return -1
+            else { return false }
+        }
 
-        // if (!limit) res.redirect('/views/products')
+        const limit = req.query.limit ? Number(req.query.limit) : 10
+        const page = req.query.page ? Number(req.query.page) : 1
+        const query = req.query.query ? { category: req.query.query } : { status: true }
+        const sort = req.query.sort ? { price: ordenar(req.query.sort) } : { _id: 1 }
 
-        // else {
-            res.redirect(`/views/products?limit=${limit}?page=${page}?sort=${sort}?query=${query}`)
-        // }
-        
+        const obj = { limit, page, sort, query }
+
+        const list = await prod.getProducts(obj)
+        res.json(list)
+
+
 
     } catch (error) {
         console.log(error)

@@ -1,11 +1,11 @@
 <div id="contain" class="container products">
-{{#if product}}
+    {{#if product}}
     {{#if list.error}}
     <div class="error">
-    <h1>Error!</h1>
-    <br>    <br>
-    <h3>{{list.error}}</h3>
-    <img alt="error" class="error" src="../../images/error.png">
+        <h1>Error!</h1>
+        <br> <br>
+        <h3>{{list.error}}</h3>
+        <img alt="error" class="error" src="../../images/error.png">
     </div>
 
     {{else}}
@@ -28,33 +28,48 @@
 
 
     {{else}}
-        <h1>Agregar un Producto</h1>
-        <form class="form" id="formProduct">
-            <input required placeholder="Titulo / Nombre" type="text" name="title" id="title" autocomplete="off" >
-            <input required placeholder="Descripcion" type="text" name="description" id="description" autocomplete="off">
-            <input required placeholder="Codigo" type="text" name="code" id="code" autocomplete="off">
-            <input required placeholder="Precio" type="number" name="price" id="price" autocomplete="off">
-            <input required placeholder="Stock" type="number" name="stock" id="stock" autocomplete="off">
-            <input required placeholder="Categoria" type="text" name="category" id="category" autocomplete="off">
-            <input required placeholder="Imagenes" type="text" name="thumbnails" id="thumbnails" autocomplete="off">
-            <section>
-                <label form="status">Estado: </label>
-                <select name="status" id="status">
-                    <option>true</option>
-                    <option>false</option>
-                </select>
-            </section>
-            <div id="msj-form">Complete todos los campos.</div>
-            <input id="addProduct"type="submit" value="Agregar Producto">
-        </form>
-        
+    <h1>Agregar un Producto</h1>
+    <form class="form" id="formProduct">
+        <input required placeholder="Titulo / Nombre" type="text" name="title" id="title" autocomplete="off">
+        <input required placeholder="Descripcion" type="text" name="description" id="description" autocomplete="off">
+        <input required placeholder="Codigo" type="text" name="code" id="code" autocomplete="off">
+        <input required placeholder="Precio" type="number" name="price" id="price" autocomplete="off">
+        <input required placeholder="Stock" type="number" name="stock" id="stock" autocomplete="off">
+        <input required placeholder="Categoria" type="text" name="category" id="category" autocomplete="off">
+        <input required placeholder="Imagenes" type="text" name="thumbnails" id="thumbnails" autocomplete="off">
+        <section>
+            <label form="status">Estado: </label>
+            <select name="status" id="status">
+                <option>true</option>
+                <option>false</option>
+            </select>
+        </section>
+        <div id="msj-form">Complete todos los campos.</div>
+        <input id="addProduct" type="submit" value="Agregar Producto">
+    </form>
+
     <h1>Lista de Productos:</h1>
     <div id="socket-list">
+        {{#each list}}
+        <div class="products-header">
+            <p> {{category}} </p>
+            <h3> {{title}} </h3>
+            <p>{{code}}</p>
+        </div>
+        <p> Descripcion: {{description}} </p>
+        <p> Precio: {{price}}</p>
+        <p> Stock: {{stock}}</p>
+        <p> Estado: {{status}}</p>
+        <div>
+            <p>Imagenes:</p>
+            {{!-- <img class="bigLogo" src={{thumbnails[0].front_default}}>  --}}
+        </div>
+            <br>
+            {{/each}}
+        </div>
+        {{/if}}
 
     </div>
-    {{/if}}
-
-</div>
 
 
 
@@ -62,5 +77,5 @@
 
 
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="../../products.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../../products.js"></script>

@@ -23,9 +23,9 @@ const carts = new CartManagerDB()
 //VIEWS CHAT
 router.get('/chat', async (req, res) => {
   try {
-    const chat =  await chatModel.find({})
+    const chat = await chatModel.find({})
     console.log(chat)
-    res.render('chat',{chat})
+    res.render('chat', { chat })
 
   } catch (error) {
     console.log(error)
@@ -39,7 +39,7 @@ router.get('/chat', async (req, res) => {
 router.get('/carts', async (req, res) => {
   try {
     const allCarts = await carts.getCarts()
-    res.render('carts', { "viewsAll": true,  allCarts })
+    res.render('carts', { "viewsAll": true, allCarts })
     // res.json(allCarts)
   } catch (error) {
     console.log(error)
@@ -64,17 +64,24 @@ router.get('/carts/:cid', async (req, res) => {
 
 
 // VIEWS REALTIMEPRODUCTS
+// NO PUEDO USAR EL SOCKET POR QUE NO TENGO COMO PASARLE LOS REQ.QUERY xd espero respuesta ah
 router.get('/products', async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit)
-    const products = await onlineProducts.getProducts()
+    function ordenar(orde) {
+      if (orde == 'asc') return 1
+      if (orde == 'desc') return -1
+      else { return false }
+    }
 
-    return res.render('products', { 'list': products, 'product': false })
+    const limit = req.query.limit ? Number(req.query.limit) : 10
+    const page = req.query.page ? Number(req.query.page) : 1
+    const query = req.query.query ? { category: req.query.query } : { status: true }
+    const sort = req.query.sort ? { price: ordenar(req.query.sort) } : { _id: 1 }
 
-    // if (!limit) return res.render('products', { 'list': products, 'product': false })
+    const obj = { limit, page, sort, query }
 
-    // const prodLimit = await products.filter(prode => prode.id <= limit)
-    // res.render('products', { 'list': prodLimit, 'product': false })
+    const products = await onlineProducts.getProducts(obj)
+    return res.render('products', { 'list': products.payload, 'product': false })
 
 
   } catch (error) {

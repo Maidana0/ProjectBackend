@@ -11,7 +11,7 @@ import cartsRouter from './routes/cart.router.js'
 import viewsRouter from './routes/views.router.js'
 
 
-import {SocketServer} from './socket/socket.js';
+import { SocketServer } from './socket/socket.js';
 
 
 const PORT = 8080
@@ -30,9 +30,9 @@ app.use('/api/carts', cartsRouter)
 
 
 
-    const httpServer = app.listen(PORT, () => console.log(`Server on Port: ${PORT}`))
-    const socketServer = new Server(httpServer)
-    SocketServer(socketServer)
+const httpServer = app.listen(PORT, () => console.log(`Server on Port: ${PORT}`))
+const socketServer = new Server(httpServer)
+SocketServer(socketServer)
 
 
 
