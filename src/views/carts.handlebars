@@ -1,15 +1,16 @@
 <div class="container products">
-    {{#if allCarts}}
-    {{#each list}}
+    {{#if viewsAll}}
+
+    {{#each allCarts}}
     <div class="list-products">
         <div class="products-header">
-            <h2>Carrito N°:{{id}}</h2>
-            <p>Id:{{id}}</p>
+            <h2>Carrito N°:{{_id}}</h2>
+            <p>Id:{{_id}}</p>
         </div>
         <h3>Productos en el Carrito:</h3>
         <br>
         {{#each products}}
-        <p>Producto con el ID: {{id}}</p>
+        <p>Producto con el ID: {{product}}</p>
         <p>Cantidad:{{quantity}}</p>
         <hr>
         {{/each}}
@@ -22,13 +23,13 @@
     {{else}}
     <div class="list-products">
         <div class="products-header">
-            <h2>Carrito N°:{{list.id}}</h2>
-            <p>Id:{{list.id}}</p>
+            <h2>Carrito N°:{{cart._id}}</h2>
+            <p>Id:{{cart._id}}</p>
         </div>
         <h3>Productos en el Carrito:</h3>
         <br>
-        {{#each products}}
-        <p>Producto con el ID: {{id}}</p>
+        {{#each cart.products}}
+        <p>Producto con el ID: {{_id}}</p>
         <p>Cantidad:{{quantity}}</p>
         <hr>
         {{/each}}

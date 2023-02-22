@@ -7,8 +7,10 @@ export class ProductManagerDB {
 
     async getProducts() {
         try {
-            const listProducts = await productsModel.find({})
+            const listProducts = await productsModel.find()
+
             return listProducts && listProducts
+
         } catch (error) {
             return { error }
         }
@@ -16,7 +18,7 @@ export class ProductManagerDB {
 
     async getProductById(getId) {
         try {
-            const getProduct = await productsModel.findById(getId)
+            const getProduct = await productsModel.find({_id:getId})
             if (getProduct) {
                 return getProduct
             }

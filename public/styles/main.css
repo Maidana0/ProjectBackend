@@ -149,7 +149,9 @@ h1{
     background-color: black;
     padding: 10px;
 }
-
+.products-header p:nth-child(1){
+    text-transform: capitalize;
+}
 .header{
     display: flex;
     flex-direction: row;

@@ -1,26 +1,40 @@
 import { Router } from "express";
-// import ProductManager from "../components/fileSystem/ProductManager.js";
 import { __dirname } from "../utils.js";
 
 const router = Router()
-// const ruta = __dirname + '/components/db/Productos.json'
-// const prod = new ProductManager(ruta)
 
 import { ProductManagerDB } from "../components/mongoDB/ProductManagerDB.js";
 const prod = new ProductManagerDB()
 
 
+// router.get('/', async (req, res) => {
+//     try {
+//         const limit = parseInt(req.query.limit)
+
+//         if (!limit) res.redirect('/views/products')
+//         else {
+//             res.redirect(`/views/products?limit=${limit}`)
+//         }
+//     } catch (error) {
+//         console.log(error)
+//     }
+// })
 router.get('/', async (req, res) => {
     try {
-        const limit = parseInt(req.query.limit)
-        if (!limit) res.redirect('/views/products')
-        else {
-            res.redirect(`/views/products?limit=${limit}`)
-        }
+        const {limit,page, sort, query} = req.query
+
+        // if (!limit) res.redirect('/views/products')
+
+        // else {
+            res.redirect(`/views/products?limit=${limit}?page=${page}?sort=${sort}?query=${query}`)
+        // }
+        
+
     } catch (error) {
         console.log(error)
     }
 })
+
 
 
 router.get('/:pid', async (req, res) => {

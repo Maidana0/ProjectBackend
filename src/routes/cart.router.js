@@ -1,13 +1,7 @@
 import { Router } from "express";
-// import CartManager from "../components/fileSystem/CartManager.js";
-// import { __dirname } from "../utils.js";
 import { CartManagerDB } from "../components/mongoDB/CartManagerDB.js";
-
 const router = Router()
 
-// const URLcarts = __dirname + '/components/db/Carts.json'
-// const URLproducts = __dirname + '/components/db/Productos.json'
-// const carts = new CartManager(URLcarts,URLproducts)
 const carts = new CartManagerDB()
 
 router.post('/', async(req,res)=>{
@@ -35,12 +29,12 @@ router.post('/:cid/product/:pid', async(req,res)=>{
         const {cid,pid} = req.params
 
         const carti= await carts.addProduct(cid,pid)
-
         res.send(carti)
     } catch (error) {
         console.log(error)
     }
 })
+
 
 
 

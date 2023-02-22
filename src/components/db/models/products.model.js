@@ -16,19 +16,21 @@ const productSchema = new mongoose.Schema({
     },
     price:{
         type: Number,
-        required: true
+        required: true,
+        index: true
     },
     status:{
         type: Boolean,
         required: true
-    },
+        },
     stock:{
         type: Number,
         required: true
     },
     category:{
         type: String,
-        required: true
+        required: true,
+        index: true
     },
     thumbnails:{
         type: Array,

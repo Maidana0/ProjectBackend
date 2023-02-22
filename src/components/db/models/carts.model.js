@@ -1,35 +1,26 @@
 import mongoose from "mongoose";
 
-// const cartSchema = new mongoose.Schema({
-//     products:{
-//         id: {
-//             type: String,
-//             required: true
-//         },
-//         quantity: {
-//             type: Number,
-//             required: true
-//         }
-//     },  
-// })
-
 const cartSchema = new mongoose.Schema({
     products:{
-        type:Array,
-        required: true
+        type: Array,
+        default:[],
+        
+        product: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'products'
+        }]
+        ,
+        quantity: {
+            type: Number,
+            required: true,
+            default: 1
+        }
     }
 })
 
-
-// const cartProductsSchema = new mongoose.Schema({
-//     // "_id":{
-//     //     type: isObjectIdOrHexString
-//     // },
-//     "quantity": {
-//         type: Number,
-//         required: true
-//     }
-// })
-
+cartSchema.pre('find',function (next){
+    this.populate('products.product')
+    next()
+  })
 
 export const cartsModel = mongoose.model('carts', cartSchema)

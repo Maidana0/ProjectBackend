@@ -11,6 +11,7 @@ import { Router } from "express";
 const router = Router()
 
 import { chatModel } from "../components/db/models/chat.models.js";
+import { cartsModel } from "../components/db/models/carts.model.js";
 import { CartManagerDB } from "../components/mongoDB/CartManagerDB.js";
 import { ProductManagerDB } from "../components/mongoDB/ProductManagerDB.js";
 const onlineProducts = new ProductManagerDB()
@@ -34,21 +35,28 @@ router.get('/chat', async (req, res) => {
 
 //---------------------------------------------------------------------
 // VIEWS CARTS
+
 router.get('/carts', async (req, res) => {
   try {
     const allCarts = await carts.getCarts()
-    console.log(allCarts)
-    res.render('carts', { "allCarts": true, list: allCarts })
+    res.render('carts', { "viewsAll": true,  allCarts })
+    // res.json(allCarts)
   } catch (error) {
     console.log(error)
   }
 })
+
+
+
+
+
+
+
 router.get('/carts/:cid', async (req, res) => {
   try {
     const cartId = req.params.cid
     const cart = await carts.getCart(cartId)
-    console.log(cart)
-    res.render('carts', { "allCarts": false, list: cart })
+    res.render('carts', { "viewsAll": false, cart })
   } catch (error) {
     console.log(error)
   }
@@ -60,10 +68,14 @@ router.get('/products', async (req, res) => {
   try {
     const limit = parseInt(req.query.limit)
     const products = await onlineProducts.getProducts()
-    if (!limit) return res.render('products', { 'list': products, 'product': false })
 
-    const prodLimit = await products.filter(prode => prode.id <= limit)
-    res.render('products', { 'list': prodLimit, 'product': false })
+    return res.render('products', { 'list': products, 'product': false })
+
+    // if (!limit) return res.render('products', { 'list': products, 'product': false })
+
+    // const prodLimit = await products.filter(prode => prode.id <= limit)
+    // res.render('products', { 'list': prodLimit, 'product': false })
+
 
   } catch (error) {
     console.log(error)
@@ -73,8 +85,9 @@ router.get('/products', async (req, res) => {
 
 router.get('/products/:pid', async (req, res) => {
   try {
-    const idProduct = parseInt(req.params.pid)
+    const idProduct = req.params.pid
     const aProduct = await onlineProducts.getProductById(idProduct)
+    console.log(aProduct)
     res.render('products', { 'list': aProduct, 'product': true })
 
   } catch (error) {

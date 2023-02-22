@@ -35,39 +35,43 @@ const addProduct = obj => {
     div.classList.add('list-products')
     div.innerHTML = `
             <div class="products-header">
-                <p> ${obj.id}</p>
+                <p> ${obj.category} </p>
                 <h3>${obj.title}</h3>
             <p>${obj.code}</p>
             </div>
-            <p> Categoria: ${obj.category} </p>
             <p> Descripcion: ${obj.description} </p>
             <p> Precio: ${obj.price}</p>
             <p> Stock: ${obj.stock}</p>
             <p> Estado: ${obj.status}</p>
             <div>
-                Imagenes:${obj.thumbnails}
+            <p>Imagenes:</p>
+            <img class="bigLogo" src="${obj.thumbnails[0].front_default}"
             </div>
-            <button id="btn-update" data-id="${obj._id}">Editar</button>
-            <button id="btn-delete" data-id="${obj._id}">Borrar</button>
+            <br>
+             
     `
+
     if(!contain) return
     contain.appendChild(div)
-    const btnUpdate = div.querySelector('#btn-update')
-    const btnDelete = div.querySelector('#btn-delete')
+    //  SAQUE ESTOS DOS DEL HTML PARA EVITAR PROBLEMAS, PARA NO BORRAR PRODUCTOS xd
+    //          <button id="btn-update" data-id="${obj._id}">Editar</button>
+    //          <button id="btn-delete" data-id="${obj._id}">Borrar</button> 
+    // const btnUpdate = div.querySelector('#btn-update')
+    // const btnDelete = div.querySelector('#btn-delete')
 
-    btnDelete.addEventListener('click', (e) => {
-        e.preventDefault()
-        socket.emit('client:deleteProd', btnDelete.dataset.id)
-        console.log("Borrar elemento: " + btnDelete.dataset.id)
-        const deleteThis= lista.find((producto)=>producto._id==btnDelete.dataset.id)
-        const index = lista.indexOf(deleteThis)
-        lista.splice(index,1)
-    })
+    // btnDelete.addEventListener('click', (e) => {
+    //     e.preventDefault()
+    //     socket.emit('client:deleteProd', btnDelete.dataset.id)
+    //     console.log("Borrar elemento: " + btnDelete.dataset.id)
+    //     const deleteThis= lista.find((producto)=>producto._id==btnDelete.dataset.id)
+    //     const index = lista.indexOf(deleteThis)
+    //     lista.splice(index,1)
+    // })
 
-    btnUpdate.addEventListener('click', (e) => {
-        e.preventDefault()
-        console.log(`El producto con el id: ${btnUpdate.dataset.id}, esta en proceso de ser modificado(?`)
-    })
+    // btnUpdate.addEventListener('click', (e) => {
+    //     e.preventDefault()
+    //     console.log(`El producto con el id: ${btnUpdate.dataset.id}, esta en proceso de ser modificado(?`)
+    // })
 }
 
 
@@ -101,4 +105,5 @@ socket.on('server:deleteProduct',async(data) => {
 const msjForm = document.getElementById('msj-form')
 socket.on('server:error', (e) =>  msjForm.textContent = "**" + e + "**")
 socket.on('server:newProduct', e => msjForm.textContent = e + "!!")
+
 
