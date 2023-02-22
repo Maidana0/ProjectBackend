@@ -1,13 +1,4 @@
 import { Router } from "express";
-// import { __dirname } from "../utils.js";
-// import ProductManager from "../components/fileSystem/ProductManager.js";
-// import CartManager from "../components/fileSystem/CartManager.js";
-// const rutaProducts = __dirname + '/components/db/Productos.json'
-// const rutaCarts = __dirname + '/components/db/Carts.json'
-// const carts = new CartManager(rutaCarts,rutaProducts)
-// const onlineURL = __dirname + '/components/db/Productos.json'
-// const onlineProducts = new ProductManager(onlineURL)
-
 const router = Router()
 
 import { chatModel } from "../components/db/models/chat.models.js";
