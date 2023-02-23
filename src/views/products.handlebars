@@ -11,8 +11,25 @@
     {{else}}
 
     <h1>El Producto que buscas es:</h1>
-
-    <div id='oneProduct' class="list-products">
+    <div class="list-products">
+        <div class="products-header">
+            <p> {{list.category}} </p>
+            <h3> {{list.title}} </h3>
+            <p>{{list.code}}</p>
+        </div>
+        <p> Descripcion: {{list.description}} </p>
+        <p> Precio: {{list.price}}</p>
+        <p> Stock: {{list.stock}}</p>
+        <p> Estado: {{list.status}}</p>
+        <div>
+            <p>Imagenes:</p>
+            {{#each list.thumbnails}}
+            <img class="bigLogo" src={{front_default}}>
+            {{/each}}
+        </div>
+        <button id="btn-addToCart" type='submit' data-id="{{list._id}}">Agregar al Carrito</button>
+    </div>
+    {{!-- <div id='oneProduct' class="list-products">
         <p>Id: {{list._id}}</p>
         <h3>{{list.title}}</h3>
         <p>Codigo: {{list.code}}</p>
@@ -22,7 +39,7 @@
         <p> Stock: {{list.stock}}</p>
         <p> Estado: {{ list.status }}</p>
         <div>Imagenes:{{list.tumbnails}}</div>
-    </div>
+    </div> --}}
     {{/if}}
 
 
@@ -51,31 +68,40 @@
     <h1>Lista de Productos:</h1>
     <div id="socket-list">
         {{#each list}}
-        <div class="products-header">
-            <p> {{category}} </p>
-            <h3> {{title}} </h3>
-            <p>{{code}}</p>
+        <div class="list-products">
+            <div class="products-header">
+                <p> {{category}} </p>
+                <h3> {{title}} </h3>
+                <p>{{code}}</p>
+            </div>
+            {{!-- <p> Descripcion: {{description}} </p> --}}
+            <p> Precio: {{price}}</p>
+            <p> Stock: {{stock}}</p>
+            <p> Estado: {{status}}</p>
+            {{!-- <div>
+                <p>Imagenes:</p>
+                {{#each thumbnails}}
+                <img class="bigLogo" src={{front_default}}>
+                {{/each}}
+            </div> --}}
+            <a href="http://localhost:8080/views/products/{{_id}}" id="btn-details" type='submit'
+                data-id="{{_id}}">Mostrar Detalles</a>
+            <button id="btn-addToCart" type='submit' data-id="{{_id}}">
+                Agregar al Carrito
+            </button>
         </div>
-        <p> Descripcion: {{description}} </p>
-        <p> Precio: {{price}}</p>
-        <p> Stock: {{stock}}</p>
-        <p> Estado: {{status}}</p>
-        <div>
-            <p>Imagenes:</p>
-            {{!-- <img class="bigLogo" src={{thumbnails[0].front_default}}>  --}}
-        </div>
-            <br>
-            {{/each}}
-        </div>
-        {{/if}}
-
+        {{/each}}
     </div>
 
+    {{/if}}
+
+</div>
 
 
 
 
 
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="../../products.js"></script>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="../../products.js"></script>

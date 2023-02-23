@@ -30,8 +30,7 @@ router.get('/chat', async (req, res) => {
 router.get('/carts', async (req, res) => {
   try {
     const allCarts = await carts.getCarts()
-    res.render('carts', { "viewsAll": true, allCarts })
-    // res.json(allCarts)
+    res.render('carts', { "viewsAll": true, allCarts})
   } catch (error) {
     console.log(error)
   }
@@ -47,7 +46,7 @@ router.get('/carts/:cid', async (req, res) => {
   try {
     const cartId = req.params.cid
     const cart = await carts.getCart(cartId)
-    res.render('carts', { "viewsAll": false, cart })
+    res.render('carts', { "viewsAll": false, cart})
   } catch (error) {
     console.log(error)
   }
@@ -85,8 +84,7 @@ router.get('/products/:pid', async (req, res) => {
   try {
     const idProduct = req.params.pid
     const aProduct = await onlineProducts.getProductById(idProduct)
-    console.log(aProduct)
-    res.render('products', { 'list': aProduct, 'product': true })
+    res.render('products', { 'list': aProduct[0], 'product': true })
 
   } catch (error) {
     console.log(error)

@@ -11,7 +11,8 @@ export class ProductManagerDB {
             const options = {
                 page,
                 limit,
-                sort
+                sort,
+                lean: true
             }
             const infoProducts = await productsModel.paginate(query, options)
 
@@ -44,9 +45,9 @@ export class ProductManagerDB {
 
     async getProductById(getId) {
         try {
-            const getProduct = await productsModel.find({ _id: getId })
-            if (getProduct) {
-                return getProduct
+            const getProduct = await productsModel.paginate({_id:getId},{lean:true})
+            if (getProduct.docs) {
+                return getProduct.docs
             }
             return { "error": textError(getId) }
 

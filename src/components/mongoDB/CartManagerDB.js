@@ -5,15 +5,19 @@ export class CartManagerDB {
 
     async getCarts() {
         try {
-            const listCarts = await cartsModel.find()
-            return listCarts && listCarts
+            // const listCarts = await cartsModel.find()
+            // return listCarts && listCarts
+            const infoProducts = await cartsModel.paginate({}, {lean:true})
+            return infoProducts.docs
         } catch (error) { return { error } }
     }
 
     async getCart(getId) {
         try {
-            const getCart = await cartsModel.find({ _id: getId })
-            if (getCart[0]) return getCart[0]
+            // const getCart = await cartsModel.find({ _id: getId })
+            const getCart = await cartsModel.paginate({_id:getId},{lean:true})
+            console.log(getCart)
+            if (getCart.docs) return getCart.docs[0]
             return {
                 "error": "El carrito que buscas no existe en nuestra base de datos."
             }

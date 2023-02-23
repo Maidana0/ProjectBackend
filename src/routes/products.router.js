@@ -7,18 +7,7 @@ import { ProductManagerDB } from "../components/mongoDB/ProductManagerDB.js";
 const prod = new ProductManagerDB()
 
 
-// router.get('/', async (req, res) => {
-//     try {
-//         const limit = parseInt(req.query.limit)
 
-//         if (!limit) res.redirect('/views/products')
-//         else {
-//             res.redirect(`/views/products?limit=${limit}`)
-//         }
-//     } catch (error) {
-//         console.log(error)
-//     }
-// })
 router.get('/', async (req, res) => {
     try {
         function ordenar(orde) {
