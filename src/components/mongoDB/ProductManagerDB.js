@@ -16,13 +16,9 @@ export class ProductManagerDB {
             }
             const infoProducts = await productsModel.paginate(query, options)
 
-            function prevLink() {
-                return infoProducts.hasPrevPage ? `http://localhost:8080/api/products?page=${infoProducts.page - 1}` : null
-            }
+            const prevLink = infoProducts.hasPrevPage ? `http://localhost:8080/api/products?page=${infoProducts.page - 1}` : null
+            const nextLink = infoProducts.hasNextPage ? `http://localhost:8080/api/products?page=${infoProducts.page + 1}` : null
 
-            function nextLink() {
-                return infoProducts.hasNextPage ? `http://localhost:8080/api/products?page=${infoProducts.page + 1}` : null
-            }
             const finish = {
                 status: 'success',
                 payload: infoProducts.docs,
@@ -32,8 +28,8 @@ export class ProductManagerDB {
                 page: infoProducts.page,
                 hasPrevPage: infoProducts.hasPrevPage,
                 hasNextPage: infoProducts.hasNextPage,
-                prevLink: prevLink(),
-                nextLink: nextLink()
+                prevLink,
+                nextLink
             }
 
             return finish
@@ -45,7 +41,7 @@ export class ProductManagerDB {
 
     async getProductById(getId) {
         try {
-            const getProduct = await productsModel.paginate({_id:getId},{lean:true})
+            const getProduct = await productsModel.paginate({ _id: getId }, { lean: true })
             if (getProduct.docs) {
                 return getProduct.docs
             }

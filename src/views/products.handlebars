@@ -29,41 +29,48 @@
         </div>
         <button id="btn-addToCart" type='submit' data-id="{{list._id}}">Agregar al Carrito</button>
     </div>
-    {{!-- <div id='oneProduct' class="list-products">
-        <p>Id: {{list._id}}</p>
-        <h3>{{list.title}}</h3>
-        <p>Codigo: {{list.code}}</p>
-        <p> Categoria: {{list.category}} </p>
-        <p> Descripcion: {{list.description}} </p>
-        <p> Precio: {{list.price}}</p>
-        <p> Stock: {{list.stock}}</p>
-        <p> Estado: {{ list.status }}</p>
-        <div>Imagenes:{{list.tumbnails}}</div>
-    </div> --}}
     {{/if}}
 
 
 
     {{else}}
+    
+    {{#if admin}}
     <h1>Agregar un Producto</h1>
-    <form class="form" id="formProduct">
-        <input required placeholder="Titulo / Nombre" type="text" name="title" id="title" autocomplete="off">
-        <input required placeholder="Descripcion" type="text" name="description" id="description" autocomplete="off">
-        <input required placeholder="Codigo" type="text" name="code" id="code" autocomplete="off">
-        <input required placeholder="Precio" type="number" name="price" id="price" autocomplete="off">
-        <input required placeholder="Stock" type="number" name="stock" id="stock" autocomplete="off">
-        <input required placeholder="Categoria" type="text" name="category" id="category" autocomplete="off">
-        <input required placeholder="Imagenes" type="text" name="thumbnails" id="thumbnails" autocomplete="off">
-        <section>
-            <label form="status">Estado: </label>
-            <select name="status" id="status">
-                <option>true</option>
-                <option>false</option>
-            </select>
-        </section>
-        <div id="msj-form">Complete todos los campos.</div>
-        <input id="addProduct" type="submit" value="Agregar Producto">
-    </form>
+        <form class="form" id="formProduct">
+            <input required placeholder="Titulo / Nombre" type="text" name="title" id="title" autocomplete="off">
+            <input required placeholder="Descripcion" type="text" name="description" id="description" autocomplete="off">
+            <input required placeholder="Codigo" type="text" name="code" id="code" autocomplete="off">
+            <input required placeholder="Precio" type="number" name="price" id="price" autocomplete="off">
+            <input required placeholder="Stock" type="number" name="stock" id="stock" autocomplete="off">
+            <input required placeholder="Categoria" type="text" name="category" id="category" autocomplete="off">
+            <input required placeholder="Imagenes" type="text" name="thumbnails" id="thumbnails" autocomplete="off">
+            <section>
+                <label form="status">Estado: </label>
+                <select name="status" id="status">
+                    <option>true</option>
+                    <option>false</option>
+                </select>
+            </section>
+            <div id="msj-form">Complete todos los campos.</div>
+            <input id="addProduct" type="submit" value="Agregar Producto">
+        </form> 
+        <br>
+        <button onclick="location.href='/account/logout'" id="btn-details" type='submit'>Logout</button>
+
+    {{else}}
+        <div>
+            <h1>Bienvenido a nuestro sitio web</h1>
+            <p>Es un placer contar contigo  {{user.name}} {{user.lastName}}!!</p>
+            <p>Estas conectado desde la cuenta: {{user.email}}</p>
+            <br>
+            <button onclick="location.href='/account/logout'" id="btn-details" type='submit'>Logout</button>
+            <hr>
+        </div>
+    {{/if}}
+   
+
+
 
     <h1>Lista de Productos:</h1>
     <div id="socket-list">
@@ -78,14 +85,15 @@
             <p> Precio: {{price}}</p>
             <p> Stock: {{stock}}</p>
             <p> Estado: {{status}}</p>
-            {{!-- <div>
+            <div>
                 <p>Imagenes:</p>
                 {{#each thumbnails}}
                 <img class="bigLogo" src={{front_default}}>
                 {{/each}}
-            </div> --}}
-            <a href="http://localhost:8080/views/products/{{_id}}" id="btn-details" type='submit'
-                data-id="{{_id}}">Mostrar Detalles</a>
+            </div>
+            <button onclick="location.href='/views/products/{{_id}}'" id="btn-details" type='submit'
+            data-id="{{_id}}">Mostrar Detalles</button>
+            
             <button id="btn-addToCart" type='submit' data-id="{{_id}}">
                 Agregar al Carrito
             </button>

@@ -2,7 +2,6 @@ import { Router } from "express";
 const router = Router()
 
 import { chatModel } from "../components/db/models/chat.models.js";
-import { cartsModel } from "../components/db/models/carts.model.js";
 import { CartManagerDB } from "../components/mongoDB/CartManagerDB.js";
 import { ProductManagerDB } from "../components/mongoDB/ProductManagerDB.js";
 const onlineProducts = new ProductManagerDB()
@@ -15,38 +14,29 @@ const carts = new CartManagerDB()
 router.get('/chat', async (req, res) => {
   try {
     const chat = await chatModel.find({})
-    console.log(chat)
+
     res.render('chat', { chat })
 
   } catch (error) {
     console.log(error)
   }
 })
-
-
 //---------------------------------------------------------------------
 // VIEWS CARTS
 
 router.get('/carts', async (req, res) => {
   try {
     const allCarts = await carts.getCarts()
-    res.render('carts', { "viewsAll": true, allCarts})
+    res.render('carts', { "viewsAll": true, allCarts })
   } catch (error) {
     console.log(error)
   }
 })
-
-
-
-
-
-
-
 router.get('/carts/:cid', async (req, res) => {
   try {
     const cartId = req.params.cid
     const cart = await carts.getCart(cartId)
-    res.render('carts', { "viewsAll": false, cart})
+    res.render('carts', { "viewsAll": false, cart })
   } catch (error) {
     console.log(error)
   }
@@ -71,8 +61,21 @@ router.get('/products', async (req, res) => {
     const obj = { limit, page, sort, query }
 
     const products = await onlineProducts.getProducts(obj)
-    return res.render('products', { 'list': products.payload, 'product': false })
 
+    // const admin = localStorage.getItem('admin')
+    const admin = req.session.isAdmin
+
+    return res.render('products', {
+      'list': products.payload,
+      'product': false,
+      'user': [
+        { name: req.session.name },
+        { lastName: req.session.lastName },
+        { email: req.session.email }
+      ],
+      admin
+    })
+    // ESTO DE ARRIBA ESTA DUDOSO XD USERS?
 
   } catch (error) {
     console.log(error)

@@ -1,0 +1,49 @@
+    {{#if login}}
+<div class="chat container">
+
+        <img class='bigLogo' src="../../images/batman_log.png">
+        <form id="login" class="form" action="/account/login" method="post">
+
+            <input id="email" name="email" autocomplete="off" type="email" placeholder="Escriba su usario" required>
+            <input id="password" name="password" autocomplete="off" type="password" placeholder="Contraseña" required>
+            <input type="submit" value="Ingresar">
+        {{#if deny}}
+            <p>Usuario y/o contraseña incorrectos!</p>
+            <span>Verifique los datos de sesion.</span>
+        {{/if}}
+        </from>
+        <button onclick="location.href='/account/register'">Registrarme</button>
+   
+   </div>
+   
+    {{else}}
+    <div class="register container">
+        {{#if finish}}
+            <img class="logo" src="../../images/logo.png">
+            <h3>Se ha registrado con exito!</h3>
+            <button onclick="location.href='/account/login'">Iniciar Sesion</button>
+       
+        {{else}}
+        <h1>Registrate!</h1>
+        <form id="register" class="form" action="/account/register" method="post">
+            <h3>Datos Personales</h3>
+            <input type="text" name="name"  autocomplete="off" placeholder="Ingrese su nombre..." required>
+            <input type="text" name="lastName" autocomplete="off" placeholder="Ingrese su apellido..."required>
+            <input type="tel" name="tel" autocomplete="off" placeholder="Ingrese su numero de celular">
+
+            <h3>Datos de Ingreso</h3>
+            <input type="email" name="email" autocomplete="off" type="string" placeholder="Ingrese su correo electronico" required>
+            <input type="string" name="password" autocomplete="off" type="password" placeholder="Contraseña" required>
+        
+        <input type="submit" value="Registrarme">
+        </form>
+
+        {{#if denyEmail}}
+            <p>Ese Email ya se encuentra registrado!</p>
+        {{/if}}
+        <button onclick="location.href='/account/login'">Ya estoy registrado</button>
+        {{/if}}
+    </div>
+
+
+    {{/if}}

@@ -27,7 +27,20 @@
     padding: 10px;
 }
 
-
+.register{
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto;
+    padding: 1rem 0;
+}
+.register .form{
+    box-shadow: none;
+    margin: 1rem auto;
+}
 
 .chat-msg{
     width: 100%;
@@ -113,7 +126,7 @@
     display: block;
 }
 @media only screen and (max-width: 768px){ 
-    .chat{
+    .chat, .register, .form{
         width: 95%;
     }
 }
