@@ -3,14 +3,7 @@ const router = Router()
 
 const users = []
 
-// LOGIN
-router.get('/login', async (req, res) => {
-  try {
-    res.render('login', { login: true })
-  } catch (error) {
-    console.log(error)
-  }
-})
+
 
 // router.post('/login', async (req, res) => {
 //   try {
@@ -33,15 +26,6 @@ router.get('/login', async (req, res) => {
 // })
 
 
-
-// REGISTER
-router.get('/register', async (req, res) => {
-  try {
-    res.render('login', { login: false, finish: false })
-  } catch (error) {
-    console.log(error)
-  }
-})
 // router.post('/register', async (req, res) => {
 //   try {
 //     const alreadyExist = users.find((u) => u.email == email)
@@ -51,23 +35,6 @@ router.get('/register', async (req, res) => {
 //       users.push(req.body)
 //       res.render('login', { login: false, finish: true })
 //     }
-//   } catch (error) {
-//     console.log(error)
-//   }
-// })
-
-
-
-// LOGOUT
-
-// router.get('/logout', async (req, res) => {
-//   try {
-//     req.session.destroy((error) => {
-//       if (error) { console.log(error) }
-//       else {
-//         res.redirect('account/login')
-//       }
-//     })
 //   } catch (error) {
 //     console.log(error)
 //   }
@@ -99,6 +66,7 @@ router.post('/login', async (req, res) => {
       for (const key in req.body) {
         req.session[key] = req.body[key];
       }
+      req.session.logged = true
       res.redirect('/views/products')
     }
     else {
@@ -133,7 +101,7 @@ router.get('/logout', async (req, res) => {
     req.session.destroy((error) => {
       if (error) { console.log(error) }
       else {
-        res.redirect('login')
+        res.redirect('/views/login')
       }
     })
   } catch (error) {

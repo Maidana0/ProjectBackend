@@ -1,5 +1,6 @@
 import { Router } from "express";
 const router = Router()
+import { isLogged, auth } from "../middlewares/auth.middleware.js";
 
 import { chatModel } from "../components/db/models/chat.models.js";
 import { CartManagerDB } from "../components/mongoDB/CartManagerDB.js";
@@ -7,11 +8,9 @@ import { ProductManagerDB } from "../components/mongoDB/ProductManagerDB.js";
 const onlineProducts = new ProductManagerDB()
 const carts = new CartManagerDB()
 
-
-
 //---------------------------------------------------------------------
 //VIEWS CHAT
-router.get('/chat', async (req, res) => {
+router.get('/chat', auth, async (req, res) => {
   try {
     const chat = await chatModel.find({})
 
@@ -24,7 +23,7 @@ router.get('/chat', async (req, res) => {
 //---------------------------------------------------------------------
 // VIEWS CARTS
 
-router.get('/carts', async (req, res) => {
+router.get('/carts', auth, async (req, res) => {
   try {
     const allCarts = await carts.getCarts()
     res.render('carts', { "viewsAll": true, allCarts })
@@ -32,7 +31,7 @@ router.get('/carts', async (req, res) => {
     console.log(error)
   }
 })
-router.get('/carts/:cid', async (req, res) => {
+router.get('/carts/:cid', auth, async (req, res) => {
   try {
     const cartId = req.params.cid
     const cart = await carts.getCart(cartId)
@@ -45,7 +44,7 @@ router.get('/carts/:cid', async (req, res) => {
 
 // VIEWS REALTIMEPRODUCTS
 // NO PUEDO USAR EL SOCKET POR QUE NO TENGO COMO PASARLE LOS REQ.QUERY xd espero respuesta ah
-router.get('/products', async (req, res) => {
+router.get('/products', auth, async (req, res) => {
   try {
     function ordenar(orde) {
       if (orde == 'asc') return 1
@@ -62,18 +61,17 @@ router.get('/products', async (req, res) => {
 
     const products = await onlineProducts.getProducts(obj)
 
-    // const admin = localStorage.getItem('admin')
     const admin = req.session.isAdmin
+    const logged = req.session.logged
 
     return res.render('products', {
       'list': products.payload,
       'product': false,
-      'user': [
-        { name: req.session.name },
-        { lastName: req.session.lastName },
-        { email: req.session.email }
-      ],
-      admin
+
+
+      admin,
+      email: req.session.email,
+      logged
     })
     // ESTO DE ARRIBA ESTA DUDOSO XD USERS?
 
@@ -83,12 +81,31 @@ router.get('/products', async (req, res) => {
 
 })
 
-router.get('/products/:pid', async (req, res) => {
+router.get('/products/:pid', auth, async (req, res) => {
   try {
     const idProduct = req.params.pid
     const aProduct = await onlineProducts.getProductById(idProduct)
     res.render('products', { 'list': aProduct[0], 'product': true })
 
+  } catch (error) {
+    console.log(error)
+  }
+})
+//---------------------------------------------------------------------
+//---------------------------------------------------------------------
+
+// LOGIN
+router.get('/login', isLogged, async (req, res) => {
+  try {
+    res.render('login', { login: true })
+  } catch (error) {
+    console.log(error)
+  }
+})
+// REGISTER
+router.get('/register', isLogged, async (req, res) => {
+  try {
+    res.render('login', { login: false, finish: false })
   } catch (error) {
     console.log(error)
   }

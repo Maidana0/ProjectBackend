@@ -12,7 +12,7 @@
             <span>Verifique los datos de sesion.</span>
         {{/if}}
         </from>
-        <button onclick="location.href='/account/register'">Registrarme</button>
+        <button type="button" onclick="location.href='/views/register'">Registrarme</button>
    
    </div>
    
@@ -21,7 +21,7 @@
         {{#if finish}}
             <img class="logo" src="../../images/logo.png">
             <h3>Se ha registrado con exito!</h3>
-            <button onclick="location.href='/account/login'">Iniciar Sesion</button>
+            <button onclick="location.href='/views/login'">Iniciar Sesion</button>
        
         {{else}}
         <h1>Registrate!</h1>
@@ -41,7 +41,7 @@
         {{#if denyEmail}}
             <p>Ese Email ya se encuentra registrado!</p>
         {{/if}}
-        <button onclick="location.href='/account/login'">Ya estoy registrado</button>
+        <button type="button" onclick="location.href='/views/login'">Ya estoy registrado</button>
         {{/if}}
     </div>
 

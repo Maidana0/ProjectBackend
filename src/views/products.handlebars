@@ -35,6 +35,7 @@
 
     {{else}}
     
+    {{#if logged}}
     {{#if admin}}
     <h1>Agregar un Producto</h1>
         <form class="form" id="formProduct">
@@ -56,19 +57,20 @@
             <input id="addProduct" type="submit" value="Agregar Producto">
         </form> 
         <br>
-        <button onclick="location.href='/account/logout'" id="btn-details" type='submit'>Logout</button>
+        <button onclick="location.href='/account/logout'" id="btn-details" type="button">Logout</button>
 
     {{else}}
         <div>
             <h1>Bienvenido a nuestro sitio web</h1>
-            <p>Es un placer contar contigo  {{user.name}} {{user.lastName}}!!</p>
-            <p>Estas conectado desde la cuenta: {{user.email}}</p>
+            <p>Es un placer contar contigo!!</p>
+            <p>Estas conectado desde la cuenta: {{email}}</p>
             <br>
             <button onclick="location.href='/account/logout'" id="btn-details" type='submit'>Logout</button>
             <hr>
         </div>
     {{/if}}
-   
+    {{/if}}
+
 
 
 

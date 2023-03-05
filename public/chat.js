@@ -12,7 +12,7 @@ if (!user) {
     mainChatContain.innerHTML = `
     <img class='bigLogo' src="../../images/batman_log.png">
     <form id="login" class="form">
-        <input id="user" autocomplete="off" type="string" placeholder="Escriba su usario" required>
+        <input id="user" autocomplete="off" type="string" placeholder="Escriba su nombre" required>
         <input type="submit" value="Ingresar">
     </from>
     `
