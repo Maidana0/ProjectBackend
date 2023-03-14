@@ -12,6 +12,7 @@
             <span>Verifique los datos de sesion.</span>
         {{/if}}
         </from>
+        <button type="button" onclick="location.href='/views/login/github'">Ingresar con GitHub</button>
         <button type="button" onclick="location.href='/views/register'">Registrarme</button>
    
    </div>
@@ -41,6 +42,9 @@
         {{#if denyEmail}}
             <p>Ese Email ya se encuentra registrado!</p>
         {{/if}}
+        <br>
+        <button type="button" onclick="location.href='/views/login/github'">Registrarme con GitHub</button>
+        <br>
         <button type="button" onclick="location.href='/views/login'">Ya estoy registrado</button>
         {{/if}}
     </div>

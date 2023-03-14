@@ -278,4 +278,7 @@ section{
     .form input{
         width: 100%;
     }
+    .home{
+        width: 95%;
+    }
 }
